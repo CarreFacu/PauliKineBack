@@ -7,4 +7,4 @@ router.get("/getPerson", (req: Request, res:Response)=>{
     res.send('soy una nueva ruta get')
     }
 )
-export default router ;
+export { router } ;
