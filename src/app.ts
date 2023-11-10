@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 app.use(cors())
+app.use(express.json())
 //import all ruotes , no need user other app.use
 app.use(router)
 db.then(()=>console.log("Successfully connected to MongoDB."))
