@@ -1,8 +1,10 @@
 import {Router} from 'express';
-import { getAllUser, newUser } from "../controllers/user";
+import { getAllUser, newUser, logIn } from "../controllers/user";
+import { validateToken } from '../middleware/authJTW';
 const router = Router();
 
-router.get("/getPerson", getAllUser );
-router.post("/newPerson", newUser );
+router.get("/getUsers", validateToken, getAllUser );
+router.post("/newUser", newUser );
+router.post('/login', logIn)
 
 export { router } ;
