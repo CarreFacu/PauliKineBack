@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/app.ts",
-    "test": "jest"
+    "dev": "nodemon ./src/index.ts",
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
@@ -40,7 +40,6 @@
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/test/",
       "/dist/"
     ]
   }

@@ -24,7 +24,7 @@ export const newUser= async (req: Request, res: Response) => {
         }
         body.password = await bcrypt.hash(body.password, 10);
         const newUser = await UserModel.create(body);
-        res.status(200).json(newUser)
+        res.status(201).json(newUser)
     }catch (e){
         console.error('Error to create a new User:', e);
         res.status(500).json({ error: 'Error to create a new User' });
@@ -49,11 +49,11 @@ export const logIn= async (req: Request, res: Response) => {
         }
         const token:string = jwt.sign({
             username: UserLogIn.username, rol: UserLogIn.rol
-        }, process.env.SECRET_KEY || 'secret~token',{expiresIn: "8h "});
+        }, process.env.SECRET_KEY || 'secret~token',{expiresIn: "8h"});
         res.status(200).json(token)
     }catch (e){
-        console.error('Error to create a new User:', e);
-        res.status(500).json({ error: 'Error to create a new User' });
+        console.error('Error to login with the user', e);
+        res.status(500).json({ error: 'Error to login with the user' });
     }
 
 }

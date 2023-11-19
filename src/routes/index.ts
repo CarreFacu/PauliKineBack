@@ -4,7 +4,6 @@ import { readdirSync } from "fs";
 
 const PATH_ROUTER = `${__dirname}`;
 const router = Router()
-console.log(PATH_ROUTER)
 /**
  * @param fileName
  * @return all routes for each model in the proyect without the extension
@@ -16,7 +15,6 @@ const cleanFileName = (fileName: string) =>{
 readdirSync(PATH_ROUTER).filter((fileName)=>{
     const cleanName = cleanFileName(fileName);
     if(cleanName!=='index'){
-        console.log(cleanName, 'adasadasd')
         import(`./${cleanName}`).then((moduleRouter) =>{
             router.use(`/${cleanName}`,moduleRouter.router)
         })

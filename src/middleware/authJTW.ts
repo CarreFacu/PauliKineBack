@@ -4,6 +4,7 @@ import 'dotenv/config'
 
 export const validateToken = (req: Request, res: Response, next: NextFunction) => {
     const headerToken = req.headers['authorization']
+    console.log('llego aca al valicaor')
 
     if (headerToken != undefined && headerToken.startsWith('Bearer ')) {
         // Tiene token

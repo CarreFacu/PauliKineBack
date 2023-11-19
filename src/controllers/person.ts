@@ -17,7 +17,7 @@ export const newPerson= async (req: Request, res: Response) => {
     try {
         let body: Person = req.body;
         const newPerson = await PersonModel.create(body);
-        res.status(200).json(newPerson)
+        res.status(201).json(newPerson)
     }catch (e){
         console.error('Error to create a new person:', e);
         res.status(500).json({ error: 'Error to create a new person' });
