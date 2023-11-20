@@ -71,7 +71,7 @@ describe('Person controller', () => {
         });
     })
     describe('Error model person',()=>{
-        it('should delete a person ', async () => {
+        it('should not  delete a person because the person is not found ', async () => {
             const response = await supertest(app)
                 .delete(`/person/deletePerson/655bb62f0b23c1e64f706a84`)
                 .set('Authorization', `Bearer ${authToken}`)
@@ -80,6 +80,4 @@ describe('Person controller', () => {
             expect(response.body).toEqual({ error: 'The resource you are trying to delete was not found.' });
         });
     })
-
-
 });
