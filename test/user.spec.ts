@@ -35,7 +35,8 @@ describe('Person controller', () => {
             expect(newUserResponse.body.username).toEqual("usuarioUserNamePrueba");
             expect(newUserResponse.body.rol).toEqual("admin");
         });
-        it('should get a list of person ', async () => {
+
+        it('should get a list of user ', async () => {
             const response = await supertest(app)
                 .get('/user/getUsers')
                 .set('Authorization', `Bearer ${authToken}`)
@@ -49,6 +50,26 @@ describe('Person controller', () => {
                 expect(user).toHaveProperty('password');
                 expect(user).toHaveProperty('rol');
             });
+        });
+
+        it('should delete a user ', async () => {
+            const response = await supertest(app)
+                .delete(`/user/deleteUser/${newUserResponse.body._id}`)
+                .set('Authorization', `Bearer ${authToken}`)
+
+            expect(response.status).toBe(200);
+            expect(response.body.username).toEqual("usuarioUserNamePrueba");
+            expect(newUserResponse.body.rol).toEqual("admin");
+        });
+    })
+    describe('Error model user',()=>{
+        it('should not delete a user because the person is not found ', async () => {
+            const response = await supertest(app)
+                .delete(`/user/deleteUser/655bb62f0b23c1e64f706a84`)
+                .set('Authorization', `Bearer ${authToken}`)
+
+            expect(response.status).toBe(404);
+            expect(response.body).toEqual({ error: 'The resource you are trying to delete was not found.' });
         });
     })
 });

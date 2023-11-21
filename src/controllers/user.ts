@@ -3,6 +3,7 @@ import UserModel from "../models/user";
 import { User } from "../interface/user.interface";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
 export const getAllUser= async (_req: Request, res: Response) => {
     try {
         const listUser = await UserModel.find()
@@ -28,6 +29,22 @@ export const newUser= async (req: Request, res: Response) => {
     }catch (e){
         console.error('Error to create a new User:', e);
         res.status(500).json({ error: 'Error to create a new User' });
+    }
+
+}
+
+export const deleteUser= async (req: Request, res: Response) => {
+    try {
+        const { idUser } = req.params
+        const deleteUser:User|null = await UserModel.findByIdAndDelete({ _id: idUser });
+        if(deleteUser == null){
+            res.status(404).json({ error: 'The resource you are trying to delete was not found.' })
+        }else{
+            res.status(200).json(deleteUser)
+        }
+    }catch (e){
+        console.error('Error to delete a person:', e);
+        res.status(500).json({ error: 'Error to delete a person' });
     }
 
 }
